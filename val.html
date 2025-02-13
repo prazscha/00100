@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebee;
+            color: #d32f2f;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .message-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .button {
+            background-color: #d32f2f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #b71c1c;
+        }
+        .hidden {
+            display: none;
+        }
+        .message {
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .message.exit {
+            transform: scale(0);
+            opacity: 0;
+            animation: none; /* Hentikan animasi saat keluar */
+        }
+        .message.enter {
+            animation: enter 0.5s ease forwards, float 3s ease-in-out infinite 0.5s;
+        }
+        @keyframes enter {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .teddy-bear {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 150px;
+            background-image: url('https://i.imgur.com/3QZQZQZ.png'); /* Ganti dengan link gambar teddy bear */
+            background-size: cover;
+            animation: float 3s ease-in-out infinite;
+        }
+        .falling-hearts {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .falling-hearts span {
+            position: absolute;
+            color: #d32f2f;
+            font-size: 2em;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message-container">
+            <!-- Pesan 1 -->
+            <div id="message1" class="message">
+                <h1>Happy Valentine's Day!</h1>
+                <p>Hai sayang,</p>
+                <p>Selamat Hari Valentine!</p>
+                <button class="button" onclick="showMessage('message2')">Lanjut</button>
+            </div>
+            <!-- Pesan 2 -->
+            <div id="message2" class="message hidden">
+                <p>Aku punya sesuatu yang ingin kusampaikan padamu...</p>
+                <button class="button" onclick="showMessage('message3')">Lanjut</button>
+            </div>
+            <!-- Pesan 3 -->
+            <div id="message3" class="message hidden">
+                <p>Sejak pertama kali bertemu, hidupku jadi lebih berwarna.</p>
+                <button class="button" onclick="showMessage('message4')">Lanjut</button>
+            </div>
+            <!-- Pesan 4 -->
+            <div id="message4" class="message hidden">
+                <p>Kamu adalah orang yang paling spesial untukku.</p>
+                <button class="button" onclick="showMessage('message5')">Lanjut</button>
+            </div>
+            <!-- Pesan 5 -->
+            <div id="message5" class="message hidden">
+                <p>Terima kasih telah selalu ada untukku.</p>
+                <button class="button" onclick="showMessage('message6')">Lanjut</button>
+            </div>
+            <!-- Pesan 6 -->
+            <div id="message6" class="message hidden">
+                <p>Aku sayang kamu lebih dari apapun!</p>
+                <button class="button" onclick="showMessage('message7')">Lanjut</button>
+            </div>
+            <!-- Pesan 7 (Pesan Akhir) -->
+            <div id="message7" class="message hidden">
+                <p>Selamat Hari Valentine, sayangku! ❤️</p>
+                <!-- Tidak ada tombol di sini -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Animasi Teddy Bear -->
+    <div class="teddy-bear"></div>
+
+    <!-- Animasi Hati Jatuh -->
+    <div class="falling-hearts">
+        <span style="left: 10%; animation-duration: 6s;">❤️</span>
+        <span style="left: 20%; animation-duration: 8s;">❤️</span>
+        <span style="left: 30%; animation-duration: 7s;">❤️</span>
+        <span style="left: 40%; animation-duration: 9s;">❤️</span>
+        <span style="left: 50%; animation-duration: 5s;">❤️</span>
+        <span style="left: 60%; animation-duration: 6s;">❤️</span>
+        <span style="left: 70%; animation-duration: 8s;">❤️</span>
+        <span style="left: 80%; animation-duration: 7s;">❤️</span>
+        <span style="left: 90%; animation-duration: 9s;">❤️</span>
+    </div>
+
+    <script>
+        function showMessage(nextMessageId) {
+            // Sembunyikan pesan saat ini dengan animasi
+            const currentMessage = document.querySelector('.message-container > div:not(.hidden)');
+            currentMessage.classList.add('exit');
+
+            // Tunggu animasi selesai, lalu sembunyikan dan tampilkan pesan berikutnya
+            setTimeout(() => {
+                currentMessage.classList.add('hidden');
+                currentMessage.classList.remove('exit');
+
+                const nextMessage = document.getElementById(nextMessageId);
+                nextMessage.classList.remove('hidden');
+                nextMessage.classList.add('enter');
+
+                // Hapus class 'enter' setelah animasi selesai
+                setTimeout(() => {
+                    nextMessage.classList.remove('enter');
+                }, 500);
+            }, 500); // Sesuaikan dengan durasi animasi
+        }
+    </script>
+</body>
+</html>
